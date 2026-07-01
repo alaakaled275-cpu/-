@@ -1,0 +1,10 @@
+[
+  {
+    "type": "open",
+    "emailId": "test@example.com",
+    "timestamp": "2026-07-01T17:32:26.132Z",
+    "ip": "::1",
+    "device": "💻 Windows",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+  }
+]

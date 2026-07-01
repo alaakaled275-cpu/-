@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA AI — Email Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold:   #c8a24a;
+    --gold-lt:#fbf7ee;
+    --ink:    #0f0f0f;
+    --ink2:   #1a1a1a;
+    --muted:  #6e6e6e;
+    --subtle: #9a9a9a;
+    --bg:     #f0ede8;
+    --card:   #ffffff;
+    --border: #e8e3db;
+    --green:  #1a7a4a;
+    --green-bg:#f0faf5;
+    --red:    #b52a2a;
+    --red-bg: #fff4f4;
+    --blue:   #1a4fbd;
+    --blue-bg:#f0f5ff;
+    --radius: 12px;
+  }
+  body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color:var(--ink2); font-size:14px; min-height:100vh; }
+
+  /* ── SIDEBAR ── */
+  .layout { display:flex; min-height:100vh; }
+  .sidebar { width:220px; background:var(--ink); flex-shrink:0; display:flex; flex-direction:column; position:fixed; top:0; left:0; bottom:0; z-index:100; }
+  .sidebar-brand { padding:24px 20px 20px; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .brand-name { font-size:17px; font-weight:800; color:#fff; letter-spacing:-0.3px; }
+  .brand-name span { color:var(--gold); }
+  .brand-sub { font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:0.8px; text-transform:uppercase; margin-top:4px; }
+  .sidebar-nav { padding:16px 0; flex:1; }
+  .nav-item { display:flex; align-items:center; gap:10px; padding:11px 20px; font-size:13px; font-weight:500; color:rgba(255,255,255,0.55); cursor:pointer; border-left:3px solid transparent; transition:all .15s; }
+  .nav-item.active { color:#fff; border-left-color:var(--gold); background:rgba(200,162,74,0.08); }
+  .nav-item:hover:not(.active) { color:rgba(255,255,255,0.85); background:rgba(255,255,255,0.04); }
+  .nav-icon { font-size:16px; width:20px; text-align:center; }
+  .sidebar-footer { padding:16px 20px; border-top:1px solid rgba(255,255,255,0.08); }
+  .status-dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:#2ecc71; margin-right:6px; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .status-label { font-size:11px; color:rgba(255,255,255,0.4); }
+
+  /* ── MAIN ── */
+  .main { margin-left:220px; padding:32px; flex:1; }
+  .page-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:12px; }
+  .page-title { font-size:22px; font-weight:800; color:var(--ink); letter-spacing:-0.4px; }
+  .page-sub { font-size:13px; color:var(--muted); margin-top:3px; }
+  .refresh-btn { display:flex; align-items:center; gap:7px; background:var(--ink); color:var(--gold); border:none; padding:9px 16px; border-radius:8px; font-family:inherit; font-size:13px; font-weight:600; cursor:pointer; transition:opacity .15s; }
+  .refresh-btn:hover { opacity:.85; }
+  .last-updated { font-size:11px; color:var(--subtle); margin-top:3px; text-align:right; }
+
+  /* ── STAT CARDS ── */
+  .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
+  .stat-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; }
+  .stat-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .stat-label { font-size:12px; font-weight:600; color:var(--muted); letter-spacing:0.3px; text-transform:uppercase; }
+  .stat-icon { font-size:18px; }
+  .stat-num { font-size:32px; font-weight:800; color:var(--ink); letter-spacing:-1px; line-height:1; }
+  .stat-sub { font-size:12px; color:var(--muted); margin-top:6px; }
+  .stat-bar { height:3px; background:var(--border); border-radius:2px; margin-top:14px; }
+  .stat-bar-fill { height:100%; border-radius:2px; background:var(--gold); transition:width .6s ease; }
+
+  /* ── SECTION ── */
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); }
+  .card-header { display:flex; align-items:center; justify-content:space-between; padding:18px 20px 14px; border-bottom:1px solid var(--border); }
+  .card-title { font-size:14px; font-weight:700; color:var(--ink); }
+  .card-badge { font-size:10px; font-weight:700; background:var(--gold-lt); color:#7a5800; padding:2px 8px; border-radius:100px; letter-spacing:0.4px; }
+  .card-body { padding:0; }
+
+  /* ── TIMELINE CHART ── */
+  .chart-area { padding:20px; }
+  .chart-bars { display:flex; align-items:flex-end; gap:6px; height:100px; }
+  .chart-bar-wrap { flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .chart-bar { width:100%; background:var(--gold); border-radius:4px 4px 0 0; min-height:2px; transition:height .5s ease; }
+  .chart-bar-zero { background:var(--border); }
+  .chart-label { font-size:10px; color:var(--subtle); }
+
+  /* ── DEVICE TABLE ── */
+  .device-list { padding:8px 0; }
+  .device-row { display:flex; align-items:center; gap:12px; padding:11px 20px; border-bottom:1px solid var(--border); }
+  .device-row:last-child { border-bottom:none; }
+  .device-icon { font-size:18px; width:24px; text-align:center; }
+  .device-name { font-size:13px; font-weight:500; color:var(--ink); flex:1; }
+  .device-count { font-size:13px; font-weight:700; color:var(--ink); }
+  .device-pct { font-size:11px; color:var(--subtle); margin-left:4px; }
+  .device-bar-wrap { width:80px; height:4px; background:var(--border); border-radius:2px; }
+  .device-bar-inner { height:100%; background:var(--gold); border-radius:2px; }
+
+  /* ── EVENTS TABLE ── */
+  .events-table { width:100%; border-collapse:collapse; }
+  .events-table th { font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; padding:10px 20px; text-align:left; border-bottom:1px solid var(--border); background:#fdfcfa; }
+  .events-table td { padding:12px 20px; border-bottom:1px solid var(--border); font-size:13px; color:var(--ink2); }
+  .events-table tr:last-child td { border-bottom:none; }
+  .events-table tr:hover td { background:#faf8f4; }
+  .ev-type { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; padding:2px 8px; border-radius:100px; }
+  .ev-open  { background:var(--green-bg); color:var(--green); }
+  .ev-click { background:var(--blue-bg);  color:var(--blue); }
+  .ev-id { font-family:'SF Mono','Fira Code',monospace; font-size:11px; background:#f4f1ea; color:#6b4e1a; padding:2px 6px; border-radius:4px; }
+  .ev-time { font-size:11px; color:var(--subtle); }
+  .ev-device { font-size:12px; }
+  .empty-state { text-align:center; padding:40px 20px; color:var(--muted); }
+  .empty-icon { font-size:32px; margin-bottom:10px; }
+  .empty-title { font-size:14px; font-weight:600; color:var(--ink); margin-bottom:4px; }
+  .empty-sub { font-size:12px; color:var(--subtle); }
+
+  /* ── INTEGRATION PANEL ── */
+  .integration-card { background:var(--ink); border-radius:var(--radius); padding:24px; margin-bottom:24px; }
+  .int-title { font-size:15px; font-weight:700; color:#fff; margin-bottom:6px; }
+  .int-sub { font-size:12px; color:rgba(255,255,255,0.45); margin-bottom:16px; }
+  .int-snippet { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:14px 16px; font-family:'SF Mono','Fira Code',monospace; font-size:12px; color:var(--gold); line-height:1.7; overflow-x:auto; position:relative; }
+  .copy-btn { position:absolute; top:10px; right:10px; background:rgba(200,162,74,0.15); border:1px solid rgba(200,162,74,0.3); color:var(--gold); font-family:inherit; font-size:10px; font-weight:600; padding:4px 10px; border-radius:4px; cursor:pointer; }
+  .copy-btn:hover { background:rgba(200,162,74,0.25); }
+
+  /* ── LOADING ── */
+  .loading { display:flex; align-items:center; justify-content:center; padding:60px; gap:10px; color:var(--muted); font-size:13px; }
+  .spinner { width:16px; height:16px; border:2px solid var(--border); border-top-color:var(--gold); border-radius:50%; animation:spin .7s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+
+  @media (max-width:900px) {
+    .stats-grid { grid-template-columns:repeat(2,1fr); }
+    .grid-2 { grid-template-columns:1fr; }
+  }
+  @media (max-width:640px) {
+    .sidebar { display:none; }
+    .main { margin-left:0; padding:20px; }
+    .stats-grid { grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-name">NEXORA <span>AI</span></div>
+      <div class="brand-sub">Email Tracker</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active"><span class="nav-icon">📊</span> Dashboard</div>
+      <div class="nav-item" onclick="scrollToSection('events')"><span class="nav-icon">📋</span> All Events</div>
+      <div class="nav-item" onclick="scrollToSection('integration')"><span class="nav-icon">🔗</span> Integration</div>
+    </nav>
+    <div class="sidebar-footer">
+      <span class="status-dot"></span>
+      <span class="status-label">Server live</span>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HEADER -->
+    <div class="page-header">
+      <div>
+        <div class="page-title">Email Tracking Dashboard</div>
+        <div class="page-sub">Real-time opens & clicks — NEXORA AI outreach</div>
+      </div>
+      <div>
+        <button class="refresh-btn" onclick="loadData()">⟳&nbsp; Refresh</button>
+        <div class="last-updated" id="lastUpdated">—</div>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <div class="stat-top"><span class="stat-label">Total Opens</span><span class="stat-icon">👁️</span></div>
+        <div class="stat-num" id="totalOpens">0</div>
+        <div class="stat-sub" id="uniqueOpens">unique: 0</div>
+        <div class="stat-bar"><div class="stat-bar-fill" id="barOpens" style="width:0%"></div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top"><span class="stat-label">Total Clicks</span><span class="stat-icon">🖱️</span></div>
+        <div class="stat-num" id="totalClicks">0</div>
+        <div class="stat-sub" id="uniqueClicks">unique: 0</div>
+        <div class="stat-bar"><div class="stat-bar-fill" id="barClicks" style="width:0%"></div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top"><span class="stat-label">Click Rate</span><span class="stat-icon">📈</span></div>
+        <div class="stat-num" id="clickRate">0%</div>
+        <div class="stat-sub">unique clicks / unique opens</div>
+        <div class="stat-bar"><div class="stat-bar-fill" id="barRate" style="width:0%"></div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top"><span class="stat-label">This Week</span><span class="stat-icon">📅</span></div>
+        <div class="stat-num" id="thisWeek">0</div>
+        <div class="stat-sub">opens last 7 days</div>
+        <div class="stat-bar"><div class="stat-bar-fill" id="barWeek" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <!-- TIMELINE + DEVICES -->
+    <div class="grid-2">
+      <!-- Timeline chart -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Opens — Last 7 Days</span>
+          <span class="card-badge" id="chartBadge">Loading…</span>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <div class="chart-bars" id="chartBars">
+              <div class="loading"><div class="spinner"></div> Loading chart…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Device breakdown -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Device Breakdown</span>
+          <span class="card-badge" id="deviceBadge">—</span>
+        </div>
+        <div class="card-body">
+          <div class="device-list" id="deviceList">
+            <div class="loading"><div class="spinner"></div> Loading…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECENT EVENTS TABLE -->
+    <div class="card" id="events" style="margin-bottom:24px;">
+      <div class="card-header">
+        <span class="card-title">Recent Events</span>
+        <span class="card-badge" id="eventsBadge">—</span>
+      </div>
+      <div class="card-body">
+        <table class="events-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Email ID</th>
+              <th>Device</th>
+              <th>Time</th>
+              <th>Detail</th>
+            </tr>
+          </thead>
+          <tbody id="eventsBody">
+            <tr><td colspan="5"><div class="loading"><div class="spinner"></div> Loading events…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- INTEGRATION GUIDE -->
+    <div id="integration">
+      <div class="integration-card">
+        <div class="int-title">🔗 Add Tracking to Your Email</div>
+        <div class="int-sub">Paste these two snippets into NEXORA_AI_Email_v7.html — replace YOUR_SERVER_URL with your deployed URL.</div>
+
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.6px;text-transform:uppercase;margin-bottom:8px;">1 — Open Tracking Pixel (paste just before &lt;/body&gt;)</div>
+          <div class="int-snippet" id="pixelSnippet">
+&lt;!-- NEXORA Open Tracking Pixel --&gt;<br>
+&lt;img src="https://YOUR_SERVER_URL/pixel?id={{EmailID}}"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; width="1" height="1" alt="" border="0"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; style="display:none;width:1px;height:1px;"&gt;
+            <button class="copy-btn" onclick="copySnippet('pixelSnippet')">Copy</button>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.6px;text-transform:uppercase;margin-bottom:8px;">2 — Click Tracking (replace your CTA link)</div>
+          <div class="int-snippet" id="ctaSnippet">
+&lt;!-- Replace {{CTA_LINK}} with this tracked version --&gt;<br>
+href="https://YOUR_SERVER_URL/click?id={{EmailID}}&amp;url={{CTA_LINK}}"
+            <button class="copy-btn" onclick="copySnippet('ctaSnippet')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deploy steps -->
+      <div class="card" style="margin-bottom:24px;">
+        <div class="card-header"><span class="card-title">🚀 Deploy in 5 Minutes (Railway — Free)</span></div>
+        <div class="card-body" style="padding:20px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+            <div style="border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;">Step 1</div>
+              <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">Upload to GitHub</div>
+              <div style="font-size:12px;color:var(--muted);">Push the nexora-tracker folder as a new repo</div>
+            </div>
+            <div style="border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;">Step 2</div>
+              <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">Open railway.app</div>
+              <div style="font-size:12px;color:var(--muted);">New Project → Deploy from GitHub → select your repo</div>
+            </div>
+            <div style="border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;">Step 3</div>
+              <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">Get your URL</div>
+              <div style="font-size:12px;color:var(--muted);">Railway gives you: yourid.railway.app</div>
+            </div>
+            <div style="border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;">Step 4</div>
+              <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">Paste in email</div>
+              <div style="font-size:12px;color:var(--muted);">Replace YOUR_SERVER_URL in the snippets above</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  const API_BASE = window.location.origin; // same server serves the dashboard
+  let pollTimer = null;
+
+  async function loadData() {
+    try {
+      const res  = await fetch(`${API_BASE}/api/stats`, { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+
+      renderStats(data);
+      renderChart(data.timeline);
+      renderDevices(data.devices, data.uniqueOpens || data.totalOpens);
+      renderEvents(data.recentEvents);
+
+      setConnectionState(true);
+      document.getElementById('lastUpdated').textContent =
+        'Updated ' + new Date().toLocaleTimeString();
+    } catch (err) {
+      console.warn('Tracking server not reachable:', err.message);
+      setConnectionState(false);
+    }
+  }
+
+  function setConnectionState(isLive) {
+    const dot = document.querySelector('.status-dot');
+    const label = document.querySelector('.status-label');
+    if (!dot || !label) return;
+    if (isLive) {
+      dot.style.background = '#2ecc71';
+      label.textContent = 'Server live';
+    } else {
+      dot.style.background = '#b52a2a';
+      label.textContent = 'Server unreachable';
+      document.getElementById('lastUpdated').textContent =
+        'Could not reach the tracking server — deploy it and refresh.';
+    }
+  }
+
+  function renderStats(d) {
+    const totalOpens   = d.totalOpens   || 0;
+    const totalClicks  = d.totalClicks  || 0;
+    const uniqueOpens  = d.uniqueOpens  || 0;
+    const uniqueClicks = d.uniqueClicks || 0;
+    // click rate = unique recipients who clicked / unique recipients who opened (real, honest ratio)
+    const rate = uniqueOpens ? Math.round((uniqueClicks / uniqueOpens) * 100) : 0;
+
+    document.getElementById('totalOpens').textContent  = totalOpens;
+    document.getElementById('totalClicks').textContent = totalClicks;
+    document.getElementById('uniqueOpens').textContent  = `unique: ${uniqueOpens}`;
+    document.getElementById('uniqueClicks').textContent = `unique: ${uniqueClicks}`;
+    document.getElementById('clickRate').textContent = rate + '%';
+
+    const weekTotal = Object.values(d.timeline || {}).reduce((a,b)=>a+b,0);
+    document.getElementById('thisWeek').textContent = weekTotal;
+
+    document.getElementById('barOpens').style.width  = Math.min(100, totalOpens * 5) + '%';
+    document.getElementById('barClicks').style.width = Math.min(100, totalClicks * 5) + '%';
+    document.getElementById('barRate').style.width   = Math.min(100, rate) + '%';
+    document.getElementById('barWeek').style.width   = Math.min(100, weekTotal * 5) + '%';
+  }
+
+  function renderChart(timeline) {
+    const entries = Object.entries(timeline || {});
+    if (entries.length === 0) {
+      document.getElementById('chartBars').innerHTML =
+        `<div class="empty-state" style="width:100%;"><div class="empty-icon">📉</div><div class="empty-title">No data yet</div><div class="empty-sub">The chart fills in once emails are opened</div></div>`;
+      document.getElementById('chartBadge').textContent = '0 this week';
+      return;
+    }
+    const maxVal = Math.max(...entries.map(([,v]) => v), 1);
+    const html = entries.map(([day, val]) => {
+      const pct    = Math.round((val / maxVal) * 100);
+      const label  = new Date(day + 'T00:00:00').toLocaleDateString('en', { weekday:'short' });
+      const barCls = val === 0 ? 'chart-bar chart-bar-zero' : 'chart-bar';
+      return `<div class="chart-bar-wrap">
+        <div class="${barCls}" style="height:${val === 0 ? 2 : Math.max(pct, 4)}px" title="${val} opens on ${day}"></div>
+        <div class="chart-label">${label}</div>
+      </div>`;
+    }).join('');
+    document.getElementById('chartBars').innerHTML = html;
+    const total = entries.reduce((a,[,v]) => a + v, 0);
+    document.getElementById('chartBadge').textContent = total + ' this week';
+  }
+
+  function renderDevices(devices, total) {
+    if (!devices || Object.keys(devices).length === 0) {
+      document.getElementById('deviceList').innerHTML = `<div class="empty-state"><div class="empty-icon">📱</div><div class="empty-title">No device data yet</div><div class="empty-sub">Opens will show device info here</div></div>`;
+      document.getElementById('deviceBadge').textContent = '0 devices';
+      return;
+    }
+    const sorted = Object.entries(devices).sort((a,b)=>b[1]-a[1]);
+    const max    = sorted[0][1];
+    document.getElementById('deviceBadge').textContent = sorted.length + ' device types';
+    document.getElementById('deviceList').innerHTML = sorted.map(([name, count]) => {
+      const pct = Math.round((count / (total || 1)) * 100);
+      const bar = Math.round((count / max) * 100);
+      return `<div class="device-row">
+        <span class="device-icon">${name.slice(0,2)}</span>
+        <span class="device-name">${name.slice(3)}</span>
+        <div class="device-bar-wrap"><div class="device-bar-inner" style="width:${bar}%"></div></div>
+        <span class="device-count">${count}<span class="device-pct">(${pct}%)</span></span>
+      </div>`;
+    }).join('');
+  }
+
+  function renderEvents(events) {
+    if (!events || events.length === 0) {
+      document.getElementById('eventsBody').innerHTML = `<tr><td colspan="5"><div class="empty-state"><div class="empty-icon">📭</div><div class="empty-title">No events yet</div><div class="empty-sub">Send your first tracked email to see data here</div></div></td></tr>`;
+      document.getElementById('eventsBadge').textContent = '0 events';
+      return;
+    }
+    document.getElementById('eventsBadge').textContent = events.length + ' recent';
+    document.getElementById('eventsBody').innerHTML = events.map(e => {
+      const typePill = e.type === 'open'
+        ? '<span class="ev-type ev-open">👁️ Open</span>'
+        : '<span class="ev-type ev-click">🖱️ Click</span>';
+      const time = new Date(e.timestamp).toLocaleString('en', {
+        month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'
+      });
+      const detail = e.type === 'click'
+        ? `<a href="${e.url}" target="_blank" style="color:var(--blue);text-decoration:none;font-size:11px;">${(e.url || '').slice(0,40)}…</a>`
+        : '';
+      return `<tr>
+        <td>${typePill}</td>
+        <td><span class="ev-id">${e.emailId}</span></td>
+        <td class="ev-device">${e.device || '—'}</td>
+        <td class="ev-time">${time}</td>
+        <td>${detail}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function scrollToSection(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function copySnippet(id) {
+    const el   = document.getElementById(id);
+    const text = el.innerText.replace('Copy','').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = el.querySelector('.copy-btn');
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    });
+  }
+
+  // auto-refresh every 30 seconds
+  loadData();
+  pollTimer = setInterval(loadData, 30000);
+</script>
+</body>
+</html>
