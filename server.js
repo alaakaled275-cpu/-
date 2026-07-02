@@ -184,6 +184,22 @@ app.get('/api/stats', (req, res) => {
   });
 });
 
+// ── CLEAR ALL EVENTS (reset dashboard) ────────────────────────────────────
+app.post('/api/clear', (req, res) => {
+  fs.writeFileSync(EVENTS_FILE, JSON.stringify([]));
+  res.json({ ok: true, message: 'All events cleared.' });
+});
+
+// ── EMAIL GENERATOR ────────────────────────────────────────────────────────
+app.get('/generator', (req, res) => {
+  const genFile = path.join(__dirname, 'email-generator.html');
+  if (fs.existsSync(genFile)) {
+    res.sendFile(genFile);
+  } else {
+    res.send('<h2>email-generator.html not found.</h2>');
+  }
+});
+
 // ── DASHBOARD ──────────────────────────────────────────────────────────────
 app.get('/', (req, res) => {
   if (fs.existsSync(DASH_FILE)) {

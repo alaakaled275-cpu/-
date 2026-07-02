@@ -1,15 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en" xml:lang="en" dir="ltr">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no">
-<meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark">
-<title>NEXORA AI — A few observations on your store</title>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:o="urn:schemas-microsoft-com:office:office" lang="en" xml:lang="en" dir="ltr">
 
-<!--
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <title>NEXORA AI — A few observations on your store</title>
+
+  <!--
 ============================================================================
  NEXORA AI — Enterprise Email Template  v7.0
  Audited: Outlook 2016/2019/2021/365 (Word engine, 96 + 120 DPI),
@@ -54,7 +57,7 @@
 ============================================================================
 -->
 
-<!--[if mso]>
+  <!--[if mso]>
 <noscript><xml>
 <o:OfficeDocumentSettings>
   <o:PixelsPerInch>96</o:PixelsPerInch>
@@ -63,7 +66,7 @@
 </xml></noscript>
 <![endif]-->
 
-<!--[if mso]>
+  <!--[if mso]>
 <style type="text/css">
   table, td { border-collapse:collapse; margin:0; padding:0; }
   * { font-family:Arial, Helvetica, sans-serif !important; mso-font-alt:Arial; }
@@ -72,196 +75,388 @@
 </style>
 <![endif]-->
 
-<!-- Progressive enhancement: web font (Outlook ignores this via mso-font-alt above) -->
-<!--[if !mso]><!-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" type="text/css">
-<!--<![endif]-->
+  <!-- Progressive enhancement: web font (Outlook ignores this via mso-font-alt above) -->
+  <!--[if !mso]><!-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"
+    type="text/css">
+  <!--<![endif]-->
 
-<style type="text/css">
-html, body { margin:0 !important; padding:0 !important; height:100% !important; width:100% !important; }
-* { -ms-text-size-adjust:100%; -webkit-text-size-adjust:100%; }
-body, table, td, p, a, li, blockquote { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
-table, td { mso-table-lspace:0pt; mso-table-rspace:0pt; border-collapse:collapse !important; margin:0; padding:0; }
-img { -ms-interpolation-mode:bicubic; border:0; height:auto; line-height:100%; outline:none; text-decoration:none; display:block; color:#0f0f0f; font-family:'Inter',Arial,Helvetica,sans-serif; font-size:13px; font-weight:700; }
-a[x-apple-data-detectors] { color:inherit !important; text-decoration:none !important; font-size:inherit !important; font-family:inherit !important; font-weight:inherit !important; line-height:inherit !important; }
-.yshortcuts, .yshortcuts a { color:inherit !important; text-decoration:none !important; border-bottom:none !important; background:none !important; }
-#MessageViewBody, #MessageWebViewDiv { width:100% !important; }
-u + #body a { color:inherit; text-decoration:none; font-size:inherit; font-family:inherit; font-weight:inherit; line-height:inherit; }
-a:focus { outline:2px solid #c8a24a !important; outline-offset:2px !important; }
+  <style type="text/css">
+    html,
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      height: 100% !important;
+      width: 100% !important;
+    }
 
-/* ── DARK MODE LOCK ── keeps brand palette; prevents Gmail/Apple inversion */
-@media (prefers-color-scheme:dark) {
-  .nx-bg       { background-color:#f0ede8 !important; }
-  .nx-card     { background-color:#ffffff !important; }
-  .nx-text     { color:#1a1a1a !important; }
-  .nx-muted    { color:#6e6e6e !important; }
-  .nx-border   { border-color:#e8e8e8 !important; }
-  .nx-btn-fill { background-color:#0f0f0f !important; }
-  .nx-btn-text { color:#c8a24a !important; }
-  .nx-gold     { color:#c8a24a !important; }
-  .nx-black    { color:#0f0f0f !important; }
-  .nx-badge    { background-color:#fbf7ee !important; }
-  .nx-callout  { background-color:#fdf9f1 !important; border-color:#c8a24a !important; }
-}
-[data-ogsc] .nx-bg     { background-color:#f0ede8 !important; }
-[data-ogsc] .nx-card   { background-color:#ffffff !important; }
-[data-ogsc] .nx-text   { color:#1a1a1a !important; }
-[data-ogsc] .nx-muted  { color:#6e6e6e !important; }
-[data-ogsc] .nx-btn-fill { background-color:#0f0f0f !important; }
-[data-ogsc] .nx-btn-text { color:#c8a24a !important; }
+    * {
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
 
-/* ── RESPONSIVE ── */
-@media screen and (max-width:768px) {
-  .nx-wrapper, .nx-fluid { width:100% !important; max-width:600px !important; }
-}
-@media screen and (max-width:600px) {
-  .nx-wrapper { width:100% !important; }
-  .nx-fluid   { width:100% !important; max-width:100% !important; }
-  .nx-pad     { padding-left:24px !important; padding-right:24px !important; }
-  .nx-pad-top { padding-top:28px !important; }
-  .nx-btn-table { width:100% !important; }
-  .nx-btn-link  { width:100% !important; box-sizing:border-box !important; }
-  .nx-footer-link { display:inline-block !important; padding:6px 0 !important; }
-}
-@media screen and (max-width:480px) {
-  .nx-pad  { padding-left:20px !important; padding-right:20px !important; }
-  .nx-logo { width:48px !important; height:48px !important; }
-  .nx-body-text { font-size:15px !important; line-height:24px !important; }
-}
-</style>
+    body,
+    table,
+    td,
+    p,
+    a,
+    li,
+    blockquote {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+
+    table,
+    td {
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+      border-collapse: collapse !important;
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      -ms-interpolation-mode: bicubic;
+      border: 0;
+      height: auto;
+      line-height: 100%;
+      outline: none;
+      text-decoration: none;
+      display: block;
+      color: #0f0f0f;
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    a[x-apple-data-detectors] {
+      color: inherit !important;
+      text-decoration: none !important;
+      font-size: inherit !important;
+      font-family: inherit !important;
+      font-weight: inherit !important;
+      line-height: inherit !important;
+    }
+
+    .yshortcuts,
+    .yshortcuts a {
+      color: inherit !important;
+      text-decoration: none !important;
+      border-bottom: none !important;
+      background: none !important;
+    }
+
+    #MessageViewBody,
+    #MessageWebViewDiv {
+      width: 100% !important;
+    }
+
+    u+#body a {
+      color: inherit;
+      text-decoration: none;
+      font-size: inherit;
+      font-family: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+    }
+
+    a:focus {
+      outline: 2px solid #c8a24a !important;
+      outline-offset: 2px !important;
+    }
+
+    /* ── DARK MODE LOCK ── keeps brand palette; prevents Gmail/Apple inversion */
+    @media (prefers-color-scheme:dark) {
+      .nx-bg {
+        background-color: #f0ede8 !important;
+      }
+
+      .nx-card {
+        background-color: #ffffff !important;
+      }
+
+      .nx-text {
+        color: #1a1a1a !important;
+      }
+
+      .nx-muted {
+        color: #6e6e6e !important;
+      }
+
+      .nx-border {
+        border-color: #e8e8e8 !important;
+      }
+
+      .nx-btn-fill {
+        background-color: #0f0f0f !important;
+      }
+
+      .nx-btn-text {
+        color: #c8a24a !important;
+      }
+
+      .nx-gold {
+        color: #c8a24a !important;
+      }
+
+      .nx-black {
+        color: #0f0f0f !important;
+      }
+
+      .nx-badge {
+        background-color: #fbf7ee !important;
+      }
+
+      .nx-callout {
+        background-color: #fdf9f1 !important;
+        border-color: #c8a24a !important;
+      }
+    }
+
+    [data-ogsc] .nx-bg {
+      background-color: #f0ede8 !important;
+    }
+
+    [data-ogsc] .nx-card {
+      background-color: #ffffff !important;
+    }
+
+    [data-ogsc] .nx-text {
+      color: #1a1a1a !important;
+    }
+
+    [data-ogsc] .nx-muted {
+      color: #6e6e6e !important;
+    }
+
+    [data-ogsc] .nx-btn-fill {
+      background-color: #0f0f0f !important;
+    }
+
+    [data-ogsc] .nx-btn-text {
+      color: #c8a24a !important;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media screen and (max-width:768px) {
+
+      .nx-wrapper,
+      .nx-fluid {
+        width: 100% !important;
+        max-width: 600px !important;
+      }
+    }
+
+    @media screen and (max-width:600px) {
+      .nx-wrapper {
+        width: 100% !important;
+      }
+
+      .nx-fluid {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      .nx-pad {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+      }
+
+      .nx-pad-top {
+        padding-top: 28px !important;
+      }
+
+      .nx-btn-table {
+        width: 100% !important;
+      }
+
+      .nx-btn-link {
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      .nx-footer-link {
+        display: inline-block !important;
+        padding: 6px 0 !important;
+      }
+    }
+
+    @media screen and (max-width:480px) {
+      .nx-pad {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+
+      .nx-logo {
+        width: 48px !important;
+        height: 48px !important;
+      }
+
+      .nx-body-text {
+        font-size: 15px !important;
+        line-height: 24px !important;
+      }
+    }
+  </style>
 </head>
 
 <body id="body" class="nx-bg" style="margin:0; padding:0; background-color:#f0ede8; width:100%; height:100%;">
 
-<!-- PREHEADER: inbox snippet (85 chars, within 80-120 spec) -->
-<div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;font-family:Arial,Helvetica,sans-serif;">
-A personalized walkthrough of your store — a few direct observations, nothing automated.
-</div>
-<!-- Snippet mask: 30× zero-width joiners push body text out of preview -->
-<div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">&#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847;</div>
+  <!-- PREHEADER: inbox snippet (85 chars, within 80-120 spec) -->
+  <div
+    style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;font-family:Arial,Helvetica,sans-serif;">
+    A personalized walkthrough of your store — a few direct observations, nothing automated.
+  </div>
+  <!-- Snippet mask: 30× zero-width joiners push body text out of preview -->
+  <div
+    style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">
+    &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847;
+    &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847;
+    &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847;
+    &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847; &#8203;&#847;</div>
 
-<center role="article" aria-roledescription="email" lang="en" style="width:100%; background-color:#f0ede8;" class="nx-bg">
+  <center role="article" aria-roledescription="email" lang="en" style="width:100%; background-color:#f0ede8;"
+    class="nx-bg">
 
-<!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"><tr><td><![endif]-->
+    <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"><tr><td><![endif]-->
 
-<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="nx-wrapper nx-fluid" style="width:100%; max-width:600px; margin:0 auto;">
-<tbody>
-
-  <!-- ── TOP SPACER ── -->
-  <tr aria-hidden="true">
-    <td height="48" style="font-size:0;line-height:0;height:48px;mso-line-height-rule:exactly;">&nbsp;</td>
-  </tr>
-
-  <!-- ── CARD ── -->
-  <tr>
-    <td>
-      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" class="nx-card nx-border" style="width:100%; background-color:#ffffff; border:1px solid #e0dbd3;">
+    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" align="center"
+      class="nx-wrapper nx-fluid" style="width:100%; max-width:600px; margin:0 auto;">
       <tbody>
 
-        <!-- Signature gold accent bar (3px, full width) -->
+        <!-- ── TOP SPACER ── -->
         <tr aria-hidden="true">
-          <td height="3" bgcolor="#c8a24a" style="font-size:0;line-height:0;height:3px;background-color:#c8a24a;mso-line-height-rule:exactly;">&nbsp;</td>
+          <td height="48" style="font-size:0;line-height:0;height:48px;mso-line-height-rule:exactly;">&nbsp;</td>
         </tr>
 
-        <!-- ══════════════════════════════════════════
+        <!-- ── CARD ── -->
+        <tr>
+          <td>
+            <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" class="nx-card nx-border"
+              style="width:100%; background-color:#ffffff; border:1px solid #e0dbd3;">
+              <tbody>
+
+                <!-- Signature gold accent bar (3px, full width) -->
+                <tr aria-hidden="true">
+                  <td height="3" bgcolor="#c8a24a"
+                    style="font-size:0;line-height:0;height:3px;background-color:#c8a24a;mso-line-height-rule:exactly;">
+                    &nbsp;</td>
+                </tr>
+
+                <!-- ══════════════════════════════════════════
              HEADER
         ══════════════════════════════════════════ -->
-        <tr>
-          <td class="nx-pad nx-pad-top" style="padding:36px 48px 0 48px;">
-            <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
-            <tbody>
-              <tr>
-                <!-- Logo: source must be 112×112px (2× for Retina); displayed at 56×56 -->
-                <td width="56" valign="middle" style="width:56px; padding-right:18px;">
-                  <img src="https://i.postimg.cc/VsbKkfPv/Cream-Luxury-LE-upscale-prime-x1-cropped.png"
-                       width="56" height="56" alt="NEXORA AI"
-                       role="img" class="nx-logo"
-                       style="display:block;width:56px;height:56px;border:0;outline:none;">
-                </td>
-                <!-- Wordmark as live text — visible even when images are blocked -->
-                <td valign="middle">
-                  <span class="nx-black" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; font-size:22px; font-weight:800; color:#0f0f0f; letter-spacing:-0.2px;">NEXORA&nbsp;<span class="nx-gold" style="color:#c8a24a;">AI</span></span>
-                </td>
-              </tr>
-            </tbody>
-            </table>
+                <tr>
+                  <td class="nx-pad nx-pad-top" style="padding:36px 48px 0 48px;">
+                    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <!-- Logo: source must be 112×112px (2× for Retina); displayed at 56×56 -->
+                          <td width="56" valign="middle" style="width:56px; padding-right:18px;">
+                            <img src="https://f.top4top.io/p_3834tim741.png" width="56" height="56" alt="NEXORA AI"
+                              role="img" class="nx-logo"
+                              style="display:block;width:56px;height:56px;border:0;outline:none;">
+                          </td>
+                          <!-- Wordmark as live text — visible even when images are blocked -->
+                          <td valign="middle">
+                            <span class="nx-black"
+                              style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; font-size:22px; font-weight:800; color:#0f0f0f; letter-spacing:-0.2px;">NEXORA&nbsp;<span
+                                class="nx-gold" style="color:#c8a24a;">AI</span></span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
 
-            <!-- Badge -->
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="margin-top:18px;">
-            <tbody>
-              <tr>
-                <td class="nx-badge" bgcolor="#fbf7ee" style="background-color:#fbf7ee; border:1px solid #c8a24a; padding:5px 12px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; font-size:10px; font-weight:700; color:#b08a36; letter-spacing:1px; text-transform:uppercase; mso-line-height-rule:exactly; line-height:16px;">
-                  Enterprise AI Platform
-                </td>
-              </tr>
-            </tbody>
-            </table>
-          </td>
-        </tr>
+                    <!-- Badge -->
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="margin-top:18px;">
+                      <tbody>
+                        <tr>
+                          <td class="nx-badge" bgcolor="#fbf7ee"
+                            style="background-color:#fbf7ee; border:1px solid #c8a24a; padding:5px 12px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; font-size:10px; font-weight:700; color:#b08a36; letter-spacing:1px; text-transform:uppercase; mso-line-height-rule:exactly; line-height:16px;">
+                            Enterprise AI Platform
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
 
-        <!-- Divider -->
-        <tr aria-hidden="true">
-          <td class="nx-pad" style="padding:28px 48px 0 48px;">
-            <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
-            <tbody>
-              <tr>
-                <td class="nx-border" height="1" style="font-size:0;line-height:0;border-top:1px solid #ece8e0;">&nbsp;</td>
-              </tr>
-            </tbody>
-            </table>
-          </td>
-        </tr>
+                <!-- Divider -->
+                <tr aria-hidden="true">
+                  <td class="nx-pad" style="padding:28px 48px 0 48px;">
+                    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="nx-border" height="1"
+                            style="font-size:0;line-height:0;border-top:1px solid #ece8e0;">&nbsp;</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
 
-        <!-- ══════════════════════════════════════════
+                <!-- ══════════════════════════════════════════
              BODY COPY
         ══════════════════════════════════════════ -->
-        <tr>
-          <td class="nx-pad" style="padding:28px 48px 0 48px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-            <p class="nx-text nx-body-text" style="margin:0 0 20px 0; font-size:16px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:27px; color:#1a1a1a;">
-              Hi&nbsp;{{FirstName}},
-            </p>
-            <p class="nx-text nx-body-text" style="margin:0 0 20px 0; font-size:16px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:27px; color:#1a1a1a;">
-              I spent some time reviewing <strong style="font-weight:700;">{{CompanyName}}</strong> and highlighted <strong style="font-weight:700;">one specific moment</strong> where I think customer hesitation may be happening.
-            </p>
-            <p class="nx-text nx-body-text" style="margin:0; font-size:16px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:27px; color:#1a1a1a;">
-              I'm curious whether you've noticed something similar on your side. If you're interested, I'd be happy to send over the <strong style="font-weight:700;">90-second walkthrough</strong>.
-            </p>
-          </td>
-        </tr>
+                <tr>
+                  <td class="nx-pad"
+                    style="padding:28px 48px 0 48px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                    <p class="nx-text nx-body-text"
+                      style="margin:0 0 20px 0; font-size:16px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:27px; color:#1a1a1a;">
+                      Hi&nbsp;{{FirstName}},
+                    </p>
+                    <p class="nx-text nx-body-text"
+                      style="margin:0 0 20px 0; font-size:16px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:27px; color:#1a1a1a;">
+                      I spent some time reviewing <strong style="font-weight:700;">{{CompanyName}}</strong> and
+                      highlighted <strong style="font-weight:700;">one specific moment</strong> where I think customer
+                      hesitation may be happening.
+                    </p>
+                    <p class="nx-text nx-body-text"
+                      style="margin:0; font-size:16px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:27px; color:#1a1a1a;">
+                      I'm curious whether you've noticed something similar on your side. If you're interested, I'd be
+                      happy to send over the <strong style="font-weight:700;">90-second walkthrough</strong>.
+                    </p>
+                  </td>
+                </tr>
 
-        <!-- ── Callout block: gold left-border, warm tint — highlights credibility ── -->
-        <tr>
-          <td class="nx-pad" style="padding:24px 48px 0 48px;">
-            <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" class="nx-callout" style="background-color:#fdf9f2; border-left:3px solid #c8a24a;">
-            <tbody>
-              <tr>
-                <td style="padding:16px 20px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-                  <p class="nx-text" style="margin:0; font-size:14px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:22px; color:#5a4a1a; font-style:italic;">
-                    "Reviewed personally. Built specifically for&nbsp;{{CompanyName}}."
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-            </table>
-          </td>
-        </tr>
+                <!-- ── Callout block: gold left-border, warm tint — highlights credibility ── -->
+                <tr>
+                  <td class="nx-pad" style="padding:24px 48px 0 48px;">
+                    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0"
+                      class="nx-callout" style="background-color:#fdf9f2; border-left:3px solid #c8a24a;">
+                      <tbody>
+                        <tr>
+                          <td
+                            style="padding:16px 20px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                            <p class="nx-text"
+                              style="margin:0; font-size:14px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:22px; color:#5a4a1a; font-style:italic;">
+                              "Reviewed personally. Built specifically for&nbsp;{{CompanyName}}."
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
 
-        <!-- ══════════════════════════════════════════
+                <!-- ══════════════════════════════════════════
              CTA BUTTON
              VML (Outlook) + standard anchor (all else)
              52px height → well above 44px Apple HIG minimum
         ══════════════════════════════════════════ -->
-        <tr>
-          <td class="nx-pad" align="center" style="padding:32px 48px 8px 48px;">
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" class="nx-btn-table">
-            <tbody>
-              <tr>
-                <td align="center" bgcolor="#0f0f0f" class="nx-btn-fill" style="background-color:#0f0f0f; border:1px solid #c8a24a;">
+                <tr>
+                  <td class="nx-pad" align="center" style="padding:32px 48px 8px 48px;">
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center"
+                      class="nx-btn-table">
+                      <tbody>
+                        <tr>
+                          <td align="center" bgcolor="#0f0f0f" class="nx-btn-fill"
+                            style="background-color:#0f0f0f; border:1px solid #c8a24a;">
 
-                  <!--[if mso]>
+                            <!--[if mso]>
                   <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"
-                    href="https://{{SERVER_URL}}/click?id={{EmailID}}&amp;url=https%3A%2F%2Fapi.whatsapp.com%2Fsend%2F%3Fphone%3D201152500379%26text%3DHi%252C%2BI%2527d%2Blove%2Bto%2Bsee%2Bthe%2Bwalkthrough%2Byou%2Brecorded%2Bfor%2Bour%2Bstore%26type%3Dphone_number%26app_absent%3D0"
+                    href="https://zoological-healing-production-200d.up.railway.app/click?id={{EmailID}}&amp;url=https%3A%2F%2Fapi.whatsapp.com%2Fsend%2F%3Fphone%3D201152500379%26text%3DHi%252C%2BI%2527d%2Blove%2Bto%2Bsee%2Bthe%2Bwalkthrough%2Byou%2Brecorded%2Bfor%2Bour%2Bstore%26type%3Dphone_number%26app_absent%3D0"
                     style="height:52px;v-text-anchor:middle;width:304px;"
                     arcsize="0%"
                     stroke="t" strokecolor="#C8A24A" strokeweight="1px"
@@ -273,120 +468,138 @@ A personalized walkthrough of your store — a few direct observations, nothing 
                   </v:roundrect>
                   <![endif]-->
 
-                  <!--[if !mso]><!-->
-                  <a href="https://{{SERVER_URL}}/click?id={{EmailID}}&amp;url=https%3A%2F%2Fapi.whatsapp.com%2Fsend%2F%3Fphone%3D201152500379%26text%3DHi%252C%2BI%2527d%2Blove%2Bto%2Bsee%2Bthe%2Bwalkthrough%2Byou%2Brecorded%2Bfor%2Bour%2Bstore%26type%3Dphone_number%26app_absent%3D0"
-                     target="_blank"
-                     role="button"
-                     aria-label="Send me the walkthrough for {{CompanyName}} on WhatsApp"
-                     class="nx-btn-link nx-btn-text"
-                     style="display:inline-block; width:302px; padding:0; box-sizing:border-box; background-color:#0f0f0f; color:#c8a24a; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; font-weight:700; line-height:52px; text-align:center; text-decoration:none; letter-spacing:0.5px; -webkit-text-size-adjust:none; mso-hide:all;">
-                    Send me the walkthrough&nbsp;&nbsp;&#x2192;
-                  </a>
-                  <!--<![endif]-->
+                            <!--[if !mso]><!-->
+                            <a href="https://zoological-healing-production-200d.up.railway.app/click?id={{EmailID}}&amp;url=https%3A%2F%2Fapi.whatsapp.com%2Fsend%2F%3Fphone%3D201152500379%26text%3DHi%252C%2BI%2527d%2Blove%2Bto%2Bsee%2Bthe%2Bwalkthrough%2Byou%2Brecorded%2Bfor%2Bour%2Bstore%26type%3Dphone_number%26app_absent%3D0"
+                              target="_blank" role="button"
+                              aria-label="Send me the walkthrough for {{CompanyName}} on WhatsApp"
+                              class="nx-btn-link nx-btn-text"
+                              style="display:inline-block; width:302px; padding:0; box-sizing:border-box; background-color:#0f0f0f; color:#c8a24a; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; font-weight:700; line-height:52px; text-align:center; text-decoration:none; letter-spacing:0.5px; -webkit-text-size-adjust:none; mso-hide:all;">
+                              Send me the walkthrough&nbsp;&nbsp;&#x2192;
+                            </a>
+                            <!--<![endif]-->
 
-                </td>
-              </tr>
-            </tbody>
-            </table>
-          </td>
-        </tr>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
 
-        <!-- ══════════════════════════════════════════
+                <!-- ══════════════════════════════════════════
              SIGNATURE
         ══════════════════════════════════════════ -->
-        <tr>
-          <td class="nx-pad" style="padding:32px 48px 0 48px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-            <p class="nx-text" style="margin:0 0 16px 0; font-size:16px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:26px; color:#1a1a1a;">
-              Regards,
-            </p>
+                <tr>
+                  <td class="nx-pad"
+                    style="padding:32px 48px 0 48px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                    <p class="nx-text"
+                      style="margin:0 0 16px 0; font-size:16px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:26px; color:#1a1a1a;">
+                      Regards,
+                    </p>
 
-            <!-- Signature card: slight background lift to separate it from body -->
-            <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
-            <tbody>
-              <tr>
-                <td style="padding:14px 16px; border-left:2px solid #c8a24a; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-                  <p class="nx-text" style="margin:0 0 2px 0; font-size:15px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:22px; color:#1a1a1a;">
-                    <strong style="font-weight:700;">Alaa.co</strong>&nbsp;<span class="nx-muted" style="color:#6e6e6e; font-weight:400;">— Founder, NEXORA AI</span>
-                  </p>
-                  <p class="nx-muted" style="margin:0 0 8px 0; font-size:13px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:20px; color:#8a8a8a;">
-                    Helping premium ecommerce brands convert more existing visitors.
-                  </p>
-                  <p class="nx-muted" style="margin:0 0 8px 0; font-size:13px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:20px; color:#8a8a8a;">
-                    Enterprise AI Platform &middot; Performance-Based Revenue Optimization
-                  </p>
-                  <a href="https://nexora.ai/?utm_source=email&amp;utm_medium=outreach&amp;utm_campaign=signature" target="_blank" class="nx-black" style="font-size:13px; color:#0f0f0f; font-weight:600; text-decoration:none; mso-line-height-rule:exactly; line-height:20px;">
-                    www.nexora.ai
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-            </table>
-          </td>
-        </tr>
+                    <!-- Signature card: slight background lift to separate it from body -->
+                    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td
+                            style="padding:14px 16px; border-left:2px solid #c8a24a; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                            <p class="nx-text"
+                              style="margin:0 0 2px 0; font-size:15px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:22px; color:#1a1a1a;">
+                              <strong style="font-weight:700;">Alaa.co</strong>&nbsp;<span class="nx-muted"
+                                style="color:#6e6e6e; font-weight:400;">— Founder, NEXORA AI</span>
+                            </p>
+                            <p class="nx-muted"
+                              style="margin:0 0 8px 0; font-size:13px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:20px; color:#8a8a8a;">
+                              Helping premium ecommerce brands convert more existing visitors.
+                            </p>
+                            <p class="nx-muted"
+                              style="margin:0 0 8px 0; font-size:13px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:20px; color:#8a8a8a;">
+                              Enterprise AI Platform &middot; Performance-Based Revenue Optimization
+                            </p>
+                            <a href="https://nexora.ai/?utm_source=email&amp;utm_medium=outreach&amp;utm_campaign=signature"
+                              target="_blank" class="nx-black"
+                              style="font-size:13px; color:#0f0f0f; font-weight:600; text-decoration:none; mso-line-height-rule:exactly; line-height:20px;">
+                              www.nexora.ai
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
 
-        <!-- Spacer -->
-        <tr aria-hidden="true">
-          <td height="36" style="font-size:0;line-height:0;height:36px;mso-line-height-rule:exactly;">&nbsp;</td>
-        </tr>
+                <!-- Spacer -->
+                <tr aria-hidden="true">
+                  <td height="36" style="font-size:0;line-height:0;height:36px;mso-line-height-rule:exactly;">&nbsp;
+                  </td>
+                </tr>
 
-        <!-- Divider -->
-        <tr aria-hidden="true">
-          <td class="nx-pad" style="padding:0 48px;">
-            <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
-            <tbody>
-              <tr>
-                <td class="nx-border" height="1" style="font-size:0;line-height:0;border-top:1px solid #ece8e0;">&nbsp;</td>
-              </tr>
-            </tbody>
-            </table>
-          </td>
-        </tr>
+                <!-- Divider -->
+                <tr aria-hidden="true">
+                  <td class="nx-pad" style="padding:0 48px;">
+                    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="nx-border" height="1"
+                            style="font-size:0;line-height:0;border-top:1px solid #ece8e0;">&nbsp;</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
 
-        <!-- ══════════════════════════════════════════
+                <!-- ══════════════════════════════════════════
              FOOTER
              Links have 10px vertical margin — keeps ≥8px touch spacing
              between adjacent tap targets (Apple HIG guideline).
         ══════════════════════════════════════════ -->
-        <tr>
-          <td class="nx-pad" style="padding:20px 48px 36px 48px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-            <p class="nx-muted" style="margin:0 0 10px 0; font-size:12px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:18px; color:#9a9a9a;">
-              This email was written specifically after reviewing your public website. No automated mass outreach.
-            </p>
-            <p class="nx-muted" style="margin:0; font-size:12px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:18px; color:#9a9a9a;">
-              Alaa.co &nbsp;&middot;&nbsp; NEXORA AI &nbsp;&middot;&nbsp; Enterprise AI Platform &nbsp;&middot;&nbsp; Performance-Based Revenue Optimization
-            </p>
-            <p class="nx-muted yshortcuts" style="margin:10px 0 0 0; font-size:12px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:18px;">
-              <a href="https://nexora.ai/?utm_source=email&amp;utm_medium=outreach&amp;utm_campaign=footer" target="_blank" class="nx-muted nx-footer-link" style="color:#9a9a9a; text-decoration:underline;">nexora.ai</a>
-            </p>
+                <tr>
+                  <td class="nx-pad"
+                    style="padding:20px 48px 36px 48px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                    <p class="nx-muted"
+                      style="margin:0 0 10px 0; font-size:12px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:18px; color:#9a9a9a;">
+                      This email was written specifically after reviewing your public website. No automated mass
+                      outreach.
+                    </p>
+                    <p class="nx-muted"
+                      style="margin:0; font-size:12px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:18px; color:#9a9a9a;">
+                      Alaa.co &nbsp;&middot;&nbsp; NEXORA AI &nbsp;&middot;&nbsp; Enterprise AI Platform
+                      &nbsp;&middot;&nbsp; Performance-Based Revenue Optimization
+                    </p>
+                    <p class="nx-muted yshortcuts"
+                      style="margin:10px 0 0 0; font-size:12px; mso-line-height-rule:exactly; mso-margin-top-alt:0; mso-margin-bottom-alt:0; line-height:18px;">
+                      <a href="https://nexora.ai/?utm_source=email&amp;utm_medium=outreach&amp;utm_campaign=footer"
+                        target="_blank" class="nx-muted nx-footer-link"
+                        style="color:#9a9a9a; text-decoration:underline;">nexora.ai</a>
+                    </p>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ── BOTTOM SPACER ── -->
+        <tr aria-hidden="true">
+          <td height="48" style="font-size:0;line-height:0;height:48px;mso-line-height-rule:exactly;">&nbsp;</td>
+        </tr>
+
+        <!-- ── NEXORA Open Tracking Pixel ── invisible 1x1, logs the open on load -->
+        <tr aria-hidden="true">
+          <td style="font-size:0;line-height:0;">
+            <img src="https://zoological-healing-production-200d.up.railway.app/pixel?id={{EmailID}}" width="1"
+              height="1" alt="" border="0" style="display:block;width:1px;height:1px;">
           </td>
         </tr>
 
       </tbody>
-      </table>
-    </td>
-  </tr>
+    </table>
 
-  <!-- ── BOTTOM SPACER ── -->
-  <tr aria-hidden="true">
-    <td height="48" style="font-size:0;line-height:0;height:48px;mso-line-height-rule:exactly;">&nbsp;</td>
-  </tr>
+    <!--[if mso | IE]></td></tr></table><![endif]-->
 
-  <!-- ── NEXORA Open Tracking Pixel ── invisible 1x1, logs the open on load -->
-  <tr aria-hidden="true">
-    <td style="font-size:0;line-height:0;">
-      <img src="https://{{SERVER_URL}}/pixel?id={{EmailID}}"
-           width="1" height="1" alt="" border="0"
-           style="display:block;width:1px;height:1px;">
-    </td>
-  </tr>
-
-</tbody>
-</table>
-
-<!--[if mso | IE]></td></tr></table><![endif]-->
-
-</center>
+  </center>
 </body>
+
 </html>
 
 <!-- ══════════════════════════════════════════════════════════════════════
