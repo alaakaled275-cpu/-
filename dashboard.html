@@ -402,11 +402,16 @@ href="https://YOUR_SERVER_URL/click?id={{EmailID}}&amp;url={{CTA_LINK}}"
       document.getElementById('deviceBadge').textContent = '0 devices';
       return;
     }
-    const sorted = Object.entries(devices).sort((a,b)=>b[1]-a[1]);
-    const max    = sorted[0][1];
-    document.getElementById('deviceBadge').textContent = sorted.length + ' device types';
-    document.getElementById('deviceList').innerHTML = sorted.map(([name, count]) => {
-      const pct = Math.round((count / (total || 1)) * 100);
+    // Support both old format (plain number) and new format ({count, pct})
+    const entries = Object.entries(devices).map(([name, val]) => {
+      const count = typeof val === 'object' ? val.count : val;
+      const pct   = typeof val === 'object' ? val.pct   : Math.round((count / (total || 1)) * 100);
+      return { name, count, pct };
+    }).sort((a, b) => b.count - a.count);
+
+    const max = entries[0].count;
+    document.getElementById('deviceBadge').textContent = entries.length + ' device types';
+    document.getElementById('deviceList').innerHTML = entries.map(({ name, count, pct }) => {
       const bar = Math.round((count / max) * 100);
       return `<div class="device-row">
         <span class="device-icon">${name.slice(0,2)}</span>
@@ -416,6 +421,7 @@ href="https://YOUR_SERVER_URL/click?id={{EmailID}}&amp;url={{CTA_LINK}}"
       </div>`;
     }).join('');
   }
+
 
   function renderEvents(events) {
     if (!events || events.length === 0) {

@@ -52,6 +52,25 @@ function sanitizeId(id) {
   return String(id || 'unknown').slice(0, 120).replace(/[\r\n\t]/g, '');
 }
 
+// Returns true if the id is a literal un-replaced placeholder
+function isPlaceholder(id) {
+  return /^\{\{.*\}\}$/.test(id) || id === 'unknown';
+}
+
+// Dedup: returns true if we already recorded an open for this emailId+ip
+// within the last DEDUP_MS milliseconds (prevents Gmail/Apple prefetch spam)
+const DEDUP_MS = 5 * 60 * 1000; // 5 minutes
+function isDuplicate(emailId, ip) {
+  const events = loadEvents();
+  const cutoff = Date.now() - DEDUP_MS;
+  return events.some(e =>
+    e.type === 'open' &&
+    e.emailId === emailId &&
+    e.ip === ip &&
+    new Date(e.timestamp).getTime() > cutoff
+  );
+}
+
 function isSafeUrl(url) {
   try {
     const u = new URL(url);
@@ -86,17 +105,9 @@ app.use(express.json());
 // ── PIXEL ENDPOINT — logs "open" ───────────────────────────────────────────
 app.get('/pixel', (req, res) => {
   const id = sanitizeId(req.query.id);
+  const ip = getIp(req);
 
-  saveEvent({
-    type:      'open',
-    emailId:   id,
-    timestamp: new Date().toISOString(),
-    ip:        getIp(req),
-    device:    parseUA(req.headers['user-agent']),
-    userAgent: req.headers['user-agent'] || '',
-  });
-
-  // must not cache — every load = one open
+  // Always return the GIF immediately (must not delay the email render)
   res
     .set('Content-Type',  'image/gif')
     .set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate')
@@ -104,6 +115,19 @@ app.get('/pixel', (req, res) => {
     .set('Expires',       '0')
     .status(200)
     .send(TRANSPARENT_GIF);
+
+  // Skip placeholder IDs and duplicate opens within 5 min from same IP
+  if (isPlaceholder(id)) return;
+  if (isDuplicate(id, ip)) return;
+
+  saveEvent({
+    type:      'open',
+    emailId:   id,
+    timestamp: new Date().toISOString(),
+    ip,
+    device:    parseUA(req.headers['user-agent']),
+    userAgent: req.headers['user-agent'] || '',
+  });
 });
 
 // ── CLICK ENDPOINT — logs "click" then redirects ───────────────────────────
@@ -118,15 +142,18 @@ app.get('/click', (req, res) => {
 
   if (!isSafeUrl(target)) return res.status(400).send('Unsafe or malformed url parameter');
 
-  saveEvent({
-    type:      'click',
-    emailId:   id,
-    url:       target,
-    timestamp: new Date().toISOString(),
-    ip:        getIp(req),
-    device:    parseUA(req.headers['user-agent']),
-    userAgent: req.headers['user-agent'] || '',
-  });
+  // Skip placeholder IDs
+  if (!isPlaceholder(id)) {
+    saveEvent({
+      type:      'click',
+      emailId:   id,
+      url:       target,
+      timestamp: new Date().toISOString(),
+      ip:        getIp(req),
+      device:    parseUA(req.headers['user-agent']),
+      userAgent: req.headers['user-agent'] || '',
+    });
+  }
 
   res.redirect(302, target);
 });
@@ -154,9 +181,14 @@ app.get('/api/stats', (req, res) => {
   const uniqueOpens  = [...new Set(opens.map(e => e.emailId))].length;
   const uniqueClicks = [...new Set(clicks.map(e => e.emailId))].length;
 
-  // device breakdown
+  // device breakdown — percentage based on totalOpens
+  const devRaw = {};
+  opens.forEach(e => { devRaw[e.device] = (devRaw[e.device] || 0) + 1; });
   const devices = {};
-  opens.forEach(e => { devices[e.device] = (devices[e.device] || 0) + 1; });
+  const totalO = opens.length || 1;
+  Object.entries(devRaw).forEach(([k, v]) => {
+    devices[k] = { count: v, pct: Math.round((v / totalO) * 100) };
+  });
 
   // opens over time (last 7 days)
   const timeline = {};
